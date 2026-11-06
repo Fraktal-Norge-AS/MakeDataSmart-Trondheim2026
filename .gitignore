@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+*.duckdb
+.vscode
+.venv
+__pycache__
+
+*.parquet
+.mcp.json
+mcp.json
