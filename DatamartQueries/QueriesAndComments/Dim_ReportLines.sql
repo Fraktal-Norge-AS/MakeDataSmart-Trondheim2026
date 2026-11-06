@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Dim_ReportLines AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Dim_ReportLines AS
 WITH report_lines AS (
     SELECT
         concat_ws('.', l.rapport, l.linje)            AS report_line_key,
@@ -73,3 +73,6 @@ SELECT
     )                                                 AS JSONstyle
 FROM
     styled s;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Dim_ReportLines IS
+'Report lines for the reports PL (profit and loss), BS (balance sheet) and MGMT (management P&L), one row per line. Join to Bridge_ReportLineHierarchy on ReportLine_Key. Path to the amounts: Dim_ReportLines -> Bridge_ReportLineHierarchy -> Bridge_MultidimensionalBridge -> Fact_GeneralLedger. Sort lines by SortOrder.';

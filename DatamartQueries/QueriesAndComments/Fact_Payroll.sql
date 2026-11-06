@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Fact_Payroll AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Fact_Payroll AS
 SELECT
     -- Keys
     p.firma                                           AS Company_Key,
@@ -26,3 +26,6 @@ LEFT JOIN
     MakeDataSmart2026.mds.valutakurs k
         ON k.valuta = p.valuta
        AND k.kursdato = p.utbetalt_dato;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Fact_Payroll IS
+'Salary payments, one row per payment. Join to dimensions on Company_Key and Employee_Key, and to Dim_Date on PaymentDate_Key or PayPeriod_Key (first day of the pay month).';

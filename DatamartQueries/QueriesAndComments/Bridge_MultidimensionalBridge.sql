@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Bridge_MultidimensionalBridge AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Bridge_MultidimensionalBridge AS
 WITH line_mapping AS (
     -- One row per mapping rule (only base lines have rules; totals are in rapportsum)
     SELECT
@@ -39,3 +39,6 @@ FROM
 LEFT JOIN
     MakeDataSmart2026.mds.vare v
         ON v.varegruppe = a.product_category;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Bridge_MultidimensionalBridge IS
+'Maps base report lines to the general ledger. Join to Fact_GeneralLedger on Account_Key, and also on Product_Key and Company_Key unless they are ''-999'' (= no filter; FilterCase A, AP, AC or APC tells which keys apply). Then join ReportLine_Key to Bridge_ReportLineHierarchy.BridgeReportLine_Key to get totals.';

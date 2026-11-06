@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Bridge_ReportLineHierarchy AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Bridge_ReportLineHierarchy AS
 WITH RECURSIVE hierarchy AS (
     -- Start: every total line with its direct components
     SELECT
@@ -67,3 +67,6 @@ SELECT
     b.sign_factor                                     AS SignFactor
 FROM
     base_lines b;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Bridge_ReportLineHierarchy IS
+'Links every report line, including totals such as EBITDA, to the base lines it is made of. ReportLine_Key joins Dim_ReportLines; BridgeReportLine_Key joins Bridge_MultidimensionalBridge.ReportLine_Key. Multiply the ledger amount by SignFactor.';

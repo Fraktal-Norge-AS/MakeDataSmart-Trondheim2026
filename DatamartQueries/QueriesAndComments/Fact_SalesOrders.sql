@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Fact_SalesOrders AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Fact_SalesOrders AS
 SELECT
     -- Keys
     o.firma                                           AS Company_Key,
@@ -35,3 +35,6 @@ LEFT JOIN
     MakeDataSmart2026.mds.valutakurs k
         ON k.valuta = o.valuta
        AND k.kursdato = greatest(o.ordredato, DATE '2023-01-01');
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Fact_SalesOrders IS
+'Sales orders, one row per order line. Join to dimensions on Company_Key, Customer_Key, Product_Key, and to Dim_Date on OrderDate_Key or RequestedDeliveryDate_Key. LineAmount is in OrderCurrencyCode; use LineAmountNOK to sum across currencies.';

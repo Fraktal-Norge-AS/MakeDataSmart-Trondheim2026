@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Fact_Subledger AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Fact_Subledger AS
 WITH ar_invoice AS (
     -- Customer invoices and credit notes, with the shared invoice information
     SELECT
@@ -159,3 +159,6 @@ LEFT JOIN
     MakeDataSmart2026.mds.valutakurs k
         ON k.valuta = t.currency_code
        AND k.kursdato = greatest(t.transaction_date, DATE '2023-01-01');
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Fact_Subledger IS
+'Customer (AR) and supplier (AP) invoices and payments, one row per transaction; SubledgerType tells which. Join to dimensions on Company_Key, Customer_Key (AR rows), Supplier_Key (AP rows), InterCompany_Key (Dim_Company), and to Dim_Date on TransactionDate_Key, InvoiceDate_Key or DueDate_Key. Positive amounts increase the open balance, so the sum per InvoiceID is the amount still open.';

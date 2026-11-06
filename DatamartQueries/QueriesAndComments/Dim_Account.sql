@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Dim_Account AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Account AS
 SELECT
     k.kontonr                                       AS Account_Key,
     k.kontonr                                       AS AccountID,
@@ -9,3 +9,6 @@ SELECT
     k.rapporttype                                   AS AccountType
 FROM
     MakeDataSmart2026.mds.kontoplan k;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Account IS
+'Chart of accounts, one row per account. Join to Fact_GeneralLedger and Bridge_MultidimensionalBridge on Account_Key. AccountType is PL (profit and loss) or BS (balance sheet).';

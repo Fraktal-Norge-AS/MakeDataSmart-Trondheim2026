@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Fact_GeneralLedger AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Fact_GeneralLedger AS
 SELECT
     -- Keys
     l.firma                                           AS Company_Key,
@@ -44,3 +44,6 @@ LEFT JOIN
     MakeDataSmart2026.mds.valutakurs k
         ON k.valuta = f.valuta
        AND k.kursdato = l.bilagsdato;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Fact_GeneralLedger IS
+'General ledger, one row per journal line. Join to dimensions on Company_Key, Date_Key, Account_Key, Customer_Key, Supplier_Key, Product_Key, InterCompany_Key (Dim_Company) and RegisteredByUser_Key / ApprovedByUser_Key (Dim_User). Revenue and other credits are negative. Use AmountNOK to sum across companies. For report lines (P&L, balance sheet, EBITDA) go through the bridges: Fact_GeneralLedger -> Bridge_MultidimensionalBridge -> Bridge_ReportLineHierarchy -> Dim_ReportLines.';

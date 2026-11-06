@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Dim_Product AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Product AS
 SELECT
     v.varenr                        AS Product_Key,
     v.varenr                        AS ProductID,
@@ -34,3 +34,6 @@ SELECT
     NULL                            AS LaunchDate,
     NULL                            AS DiscontinuedDate,
     false                           AS IsDiscontinued;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Product IS
+'One row per product, plus Product_Key ''-1'' for unknown product. Join to Fact_GeneralLedger, Fact_SalesOrders and Bridge_MultidimensionalBridge on Product_Key.';

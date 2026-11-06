@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Dim_Date AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Date AS
 WITH
 easter AS (
     -- Easter Sunday per year
@@ -88,3 +88,6 @@ LEFT OUTER JOIN
   holiday_per_date h 
   ON 
     h.HolidayDate = dates.d;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Date IS
+'One row per calendar day, 2023-2026, with Norwegian public holidays. Join Date_Key to the date keys in the facts: Date_Key (Fact_GeneralLedger), OrderDate_Key and RequestedDeliveryDate_Key (Fact_SalesOrders), TransactionDate_Key, InvoiceDate_Key and DueDate_Key (Fact_Subledger), PaymentDate_Key and PayPeriod_Key (Fact_Payroll).';

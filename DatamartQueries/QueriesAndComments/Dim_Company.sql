@@ -1,4 +1,4 @@
-CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart.Dim_Company AS
+CREATE OR REPLACE VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Company AS
 SELECT
     f.firma                         AS Company_Key,
     f.firma                         as CompanyID,
@@ -14,3 +14,6 @@ SELECT
         END                         AS CompanyType
 FROM 
     MakeDataSmart2026.mds.firma f;
+
+COMMENT ON VIEW MakeDataSmart2026.mds_datamart_comments.Dim_Company IS
+'One row per company in the group. Join to all facts on Company_Key. In Fact_GeneralLedger and Fact_Subledger, InterCompany_Key also joins here (the counterparty group company).';
